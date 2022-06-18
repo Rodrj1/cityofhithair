@@ -1,21 +1,22 @@
 * {
-  margin: 0px;
-  padding: 0px;
+  margin: 0;
+  padding: 0;
+  border: 0;
   color: hsl(4, 72%, 95%);
   font-family: 'Cinzel', serif;
 }
 
 #root {
-  height: 100%;
+  min-height: 100vh;
 }
 
 html {
-  height: 100%;
+  min-height: 100vh;
 }
 
 body {
   background-color: hsla(52, 20%, 0%, 1);
-  height: 100vh;
+  min-height: 100vh;
   width: 100%;
 }
 
@@ -33,7 +34,7 @@ p {
   font-size: 20px;
   white-space: pre-wrap;
   font-family: 'Cormorant Upright', serif;
-  z-index: 10000;
+  z-index: 100000;
 }
 
 /* * NPC */
@@ -103,7 +104,7 @@ p {
   grid-template-rows: minmax(60px, auto) 3fr 1fr;
   grid-row-gap: 5px;
   grid-column-gap: 5px;
-  height: 100%;
+  height: 100vh;
 }
 
 /* * Layout - I */
@@ -219,7 +220,7 @@ p {
 }
 
 .map-board {
-  grid-row: 2/3;
+  grid-row: 1/4;
   grid-column: 1/5;
   background-image: url(assets/backgroundcombat.jpg);
 }
@@ -314,28 +315,32 @@ p {
   display: grid;
   justify-content: center;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-rows: 0.5fr 1fr 1fr;
   background-color: hsla(52, 20%, 0%, 0.236);
   grid-row-gap: 5px;
   height: 100vh;
   z-index: -100;
 }
 
-.main-map>.map-board {
-  grid-row: 1/4;
-}
-
 /* * Board */
 
-.grid-board-item:nth-child(1), .grid-board-item:nth-child(2) {
-  border-top: 1px solid hsla(30, 2%, 22%, 1);
-  z-index: 100;
-  grid-row: 2/4;
+.grid-board-item{
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 0px 10px;
+  border-top: 1px solid hsla(30, 2%, 22%, 1);
+  z-index: 100;
   padding: 5px;
+  margin: auto;
+}
+.grid-board-item:nth-child(1) {
+  grid-row: 2/4;
+  grid-column: 1/2;
+
+}
+.grid-board-item:nth-child(2) {
+  grid-row: 2/4;
+  grid-column: 2/3;
 }
 
 .grid-board-item:nth-child(3) {
@@ -398,11 +403,10 @@ p {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 0.2fr 1fr 1fr;
+  grid-row-gap: 5px;
   justify-content: center;
   align-items: center;
-  border: 5px solid hsl(30, 2%, 22%);
   padding: 10px;
-  height: 100vh;
 }
 
 .grid-hero-selection h1 {
