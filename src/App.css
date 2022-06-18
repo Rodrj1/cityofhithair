@@ -14,7 +14,6 @@ html {
 }
 
 body {
-  box-sizing: border-box;
   background-color: hsla(52, 20%, 0%, 1);
   height: 100%;
   width: 100%;
@@ -412,7 +411,6 @@ p {
   border: 5px solid hsl(30, 2%, 22%);
   height: 100vh;
   padding: 10px;
-  box-sizing: border-box;
 }
 
 .grid-hero-selection h1 {
@@ -942,7 +940,6 @@ p {
     border: 5px solid hsl(30, 2%, 22%);
     height: 100vh;
     padding: 10px;
-    box-sizing: border-box;
   }
 
   .grid-hero-selection h1 {
