@@ -19,7 +19,7 @@ const HeroSelection = ({ player, setPlayer }) => {
   };
 
   return (
-    <animated.div style={animationProps}>
+    <animated.div style={animationProps} className="maxHeight">
       {visibleInput ? (
         <SelectHeroName
           heroClass={heroClass}
