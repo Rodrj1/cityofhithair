@@ -18,6 +18,7 @@ import {
   lostGalleryData,
 } from "../../data/dataEnemies";
 import npcPortraits from "../../data/portraitsNPCs";
+import GameOver from "./MapGameOver";
 
 const MainMap = ({ player, setPlayer }) => {
   const [mapPresentation, setMapPresentation] = useState(true);
@@ -33,6 +34,7 @@ const MainMap = ({ player, setPlayer }) => {
     defense: 0,
     magic: 0,
   });
+  const [isPlayerAlive, setIsPlayerAlive] = useState(true);
 
   // * Player's resources
 
@@ -258,9 +260,12 @@ const MainMap = ({ player, setPlayer }) => {
               playerBoard={player}
               setFight={setFight}
               buyBlindness={buyBlindness}
+              setIsPlayerAlive={setIsPlayerAlive}
             />
           </div>
         ) : null}
+
+        {!isPlayerAlive ? <GameOver /> : null}
       </div>
     </>
   );

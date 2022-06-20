@@ -12,7 +12,13 @@ import BoardMessages from "./BoardMessages";
 import BoardPlayer from "./BoardPlayer";
 import Announcer from "../MiscComponents/Announcer";
 
-const Board = ({ enemyBoard, playerBoard, setFight, buyBlindness }) => {
+const Board = ({
+  enemyBoard,
+  playerBoard,
+  setFight,
+  buyBlindness,
+  setIsPlayerAlive,
+}) => {
   const {
     playerAction,
     setPlayerAction,
@@ -79,7 +85,7 @@ const Board = ({ enemyBoard, playerBoard, setFight, buyBlindness }) => {
       setAnnouncerText,
       setAnnouncerAttackerImg,
       setAnnouncerReceiverImg,
-      setAnnouncerSkillIcon
+      setAnnouncerSkillIcon,
     );
   };
 
@@ -117,7 +123,8 @@ const Board = ({ enemyBoard, playerBoard, setFight, buyBlindness }) => {
         setAnnouncerText,
         setAnnouncerAttackerImg,
         setAnnouncerReceiverImg,
-        setAnnouncerSkillIcon
+        setAnnouncerSkillIcon,
+        setIsPlayerAlive
       );
     }
   };

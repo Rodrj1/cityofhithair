@@ -1,5 +1,6 @@
 export const rendEnemy = (
   caster,
+  setCasterAttributes,
   target,
   setTargetAttributes,
   setMessage,
@@ -8,13 +9,15 @@ export const rendEnemy = (
   casterState,
   targetState,
   setAnimation,
-  setFightStatus
+  setFightStatus,
+  setIsPlayerAlive
 ) =>
   new Promise((resolve) => {
     const CASTER_NAME = caster.name;
     const CASTER_DAMAGE = caster.attack + 7;
     const CASTER_MAGIC = caster.magic;
     const CASTER_CRITICAL_CHANCE = caster.criticalChance;
+    const CASTER_CHANGE_ATTRIBUTES = setCasterAttributes;
     const CASTER_UPDATE_STATE = casterState;
 
     // * Set Target
@@ -37,6 +40,8 @@ export const rendEnemy = (
 
     // * Helpers
 
+    const IS_PLAYER = target.player;
+    const CHANGE_PLAYER_STATUS = setIsPlayerAlive;
     const CHANGE_FIGHT_STATUS = setFightStatus;
     const UPDATE_MESSAGE = setMessage;
     const TIMER = waitTimer;
@@ -47,7 +52,14 @@ export const rendEnemy = (
     if (MAGIC_CHECK >= 0) {
       (async () => {
         if (TARGET_HEALTH - DAMAGE_DEALT <= 0) {
-          resolve(CHANGE_FIGHT_STATUS((current) => !current));
+          if (IS_PLAYER !== undefined) {
+            resolve(
+              CHANGE_PLAYER_STATUS((current) => !current),
+              CHANGE_FIGHT_STATUS((current) => !current)
+            );
+          } else {
+            resolve(CHANGE_FIGHT_STATUS((current) => !current));
+          }
         } else {
           await TIMER(1000);
 
@@ -56,6 +68,10 @@ export const rendEnemy = (
           TARGET_CHANGE_ATTRIBUTES((prevState) => ({
             ...prevState,
             health: prevState.health - DAMAGE_DEALT,
+          }));
+          CASTER_CHANGE_ATTRIBUTES((prevState) => ({
+            ...prevState,
+            magic: prevState.magic - 1,
           }));
 
           await TIMER(1000);

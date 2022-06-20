@@ -45,7 +45,8 @@ export const getBoardAction = (
   setAnnouncerText,
   setAnnouncerFirstImg,
   setAnnouncerSecondImg,
-  setAnnouncerSkillIcon
+  setAnnouncerSkillIcon,
+  setIsPlayerAlive
 ) => {
   const updateAnnouncer = (skillIcon, text) => {
     setAnnouncerText(text);
@@ -80,7 +81,8 @@ export const getBoardAction = (
           setCasterActionState,
           setTargetActionState,
           setAnimation,
-          setFight
+          setFight,
+          setIsPlayerAlive
         );
       })();
 
@@ -296,6 +298,7 @@ export const getBoardAction = (
       (async () => {
         await rendEnemy(
           caster,
+          setCasterAttributes,
           target,
           setTargetAttributes,
           setMessageText,
@@ -304,7 +307,8 @@ export const getBoardAction = (
           setCasterActionState,
           setTargetActionState,
           setAnimation,
-          setFight
+          setFight,
+          setIsPlayerAlive
         );
       })();
 

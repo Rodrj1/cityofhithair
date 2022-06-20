@@ -3,6 +3,7 @@ import { useState } from "react";
 export const useGetPlayerStats = () => {
 
   const [player, setPlayer] = useState({
+    player: true,
     name: "",
     health: 500,
     maxHealth: 500,

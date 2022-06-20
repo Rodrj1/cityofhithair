@@ -8,7 +8,8 @@ export const attackEnemy = (
   casterState,
   targetState,
   setAnimation,
-  setFightStatus
+  setFightStatus,
+  setIsPlayerAlive
 ) =>
   new Promise((resolve) => {
     const CASTER_NAME = caster.name;
@@ -31,10 +32,12 @@ export const attackEnemy = (
       TARGET_DEFENSE,
       CASTER_CRITICAL_CHANCE
     );
+    const IS_PLAYER = target.player;
 
     // * Helpers
 
     const CHANGE_FIGHT_STATUS = setFightStatus;
+    const CHANGE_PLAYER_STATUS = setIsPlayerAlive;
     const UPDATE_MESSAGE = setMessage;
     const TIMER = waitTimer;
     const TEXT = `\n${CASTER_NAME} attacks ${TARGET_NAME} dealing ${parseFloat(
@@ -47,7 +50,14 @@ export const attackEnemy = (
       await TIMER(1000);
 
       if (TARGET_HEALTH - DAMAGE_DEALT <= 0) {
-        resolve(CHANGE_FIGHT_STATUS((current) => !current));
+        if (IS_PLAYER !== undefined) {
+          resolve(
+            CHANGE_PLAYER_STATUS((current) => !current),
+            CHANGE_FIGHT_STATUS((current) => !current)
+          );
+        } else {
+          resolve(CHANGE_FIGHT_STATUS((current) => !current));
+        }
       } else {
         TARGET_CHANGE_ATTRIBUTES((prevState) => ({
           ...prevState,
