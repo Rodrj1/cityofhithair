@@ -26,7 +26,7 @@ export const drainLife = (
 
     // * Set spell
 
-    const SPELL_POWER = 100 + 2 * CASTER_POWER;
+    const SPELL_POWER = 10 + 2 * CASTER_POWER;
     const MAGIC_COST = 2;
     const MAGIC_CHECK = CASTER_MAGIC - MAGIC_COST;
     const CHECK_MAX_HEALTH = CASTER_HEALTH + SPELL_POWER < CASTER_MAX_HEALTH;
