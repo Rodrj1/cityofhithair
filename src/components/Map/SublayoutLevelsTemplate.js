@@ -1,7 +1,7 @@
 import AnnouncerLoot from "../MiscComponents/AnnouncerLoot";
 import DialogNicolai from "../MiscComponents/DialogNicolai";
 
-const LayoutLevelsTemplate = ({
+const SublayoutLevelsTemplate = ({
   hideLoot,
   loot,
   setHideLoot,
@@ -65,4 +65,4 @@ const LayoutLevelsTemplate = ({
   );
 };
 
-export default LayoutLevelsTemplate;
+export default SublayoutLevelsTemplate;

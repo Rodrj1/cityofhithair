@@ -1,15 +1,16 @@
-import { useEffect, useState } from "react";
-// * Custom Hooks
-import { useAnnouncerLoot } from "../../helpers/hooks/useAnnouncerLoot";
-// * Components
-import LevelsEnemyTemplate from "../MiscComponents/LevelsEnemyTemplate";
-import LayoutLevelsTemplate from "./LayoutLevelsTemplate";
-// * Data/UI
-import { notesInfo } from "../../data/dataTexts";
-import { itemText } from "../../data/dataTooltips";
-import itemsIcons from "../../data/iconItems";
+import { useState } from "react";
+import SublayoutLevels from "./SublayoutLevels";
+import SublayoutNextLevel from "./SublayoutNextLevel";
+import {
+  cemeteryData,
+  mausoleumData,
+  darkPassageData,
+  lostGalleryData,
+} from "../../data/dataEnemies";
 
 const LayoutLevels = ({
+  inHithair,
+  setInHithair,
   fight,
   setFight,
   setEnemy,
@@ -18,280 +19,90 @@ const LayoutLevels = ({
   setNoteName,
   setNoteText,
   setInNote,
-  inCemetery,
-  inMausoleum,
-  inDarkPassage,
-  inLostGallery,
-  inHeartPrison,
-  cemeteryEnemies,
-  mausoleumEnemies,
-  dPassageEnemies,
-  lostGalleryEnemies,
-  setCemeteryEnemies,
-  setMausoleumEnemies,
-  setDPassageEnemies,
-  setLostGalleryEnemies,
-  setCemeteryAmount,
-  setMausoleumAmount,
-  setDPassageAmount,
-  setLostGalleryAmount,
-  levelState,
-  setLevelState,
+  setHeaderName,
 }) => {
-  const { hideLoot, setHideLoot } = useAnnouncerLoot();
-  const [loot, setLoot] = useState([]);
 
-  // * Set Enemies
+  const [inCemetery, setInCemetery] = useState(false);
+  const [inMausoleum, setInMausoleum] = useState(false);
+  const [inDarkPassage, setInDarkPassage] = useState(false);
+  const [inLostGallery, setInLostGallery] = useState(false);
+  const [inHeartPrison, setInHeartPrison] = useState(false);
 
-  const getCemeteryEnemies = cemeteryEnemies.map((enemy) => (
-    <LevelsEnemyTemplate
-      key={enemy.id}
-      id={enemy.id}
-      enemy={enemy}
-      setFight={setFight}
-      setEnemy={setEnemy}
-      enemies={cemeteryEnemies}
-      setEnemies={setCemeteryEnemies}
-      setEnemiesAmount={setCemeteryAmount}
-    />
-  ));
+  // * Levels' Data
 
-  const getMausoleumEnemies = mausoleumEnemies.map((enemy) => (
-    <LevelsEnemyTemplate
-      key={enemy.id}
-      id={enemy.id}
-      enemy={enemy}
-      setFight={setFight}
-      setEnemy={setEnemy}
-      enemies={mausoleumEnemies}
-      setEnemies={setMausoleumEnemies}
-      setEnemiesAmount={setMausoleumAmount}
-    />
-  ));
-
-  const getDarkPassageEnemies = dPassageEnemies.map((enemy) => (
-    <LevelsEnemyTemplate
-      key={enemy.id}
-      id={enemy.id}
-      enemy={enemy}
-      setFight={setFight}
-      setEnemy={setEnemy}
-      enemies={dPassageEnemies}
-      setEnemies={setDPassageEnemies}
-      setEnemiesAmount={setDPassageAmount}
-    />
-  ));
-
-  const getLostGalleryEnemies = lostGalleryEnemies.map((enemy) => (
-    <LevelsEnemyTemplate
-      key={enemy.id}
-      id={enemy.id}
-      enemy={enemy}
-      setFight={setFight}
-      setEnemy={setEnemy}
-      enemies={lostGalleryEnemies}
-      setEnemies={setLostGalleryEnemies}
-      setEnemiesAmount={setLostGalleryAmount}
-    />
-  ));
-
-  // * Set items
-
-  const cemeteryLoot = [
-    {
-      name: "+100 gold.",
-      img: itemsIcons.playergold,
-      iconClass: "icon-item-img",
-      buttonClass: "button-item",
-    },
-    {
-      name: "Tome: Of Koetria.",
-      img: itemsIcons.note,
-      iconClass: "icon-item-img",
-      buttonClass: "button-item",
-    },
-    {
-      name: "Journal - Part I.",
-      img: itemsIcons.note,
-      iconClass: "icon-item-img",
-      buttonClass: "button-item",
-    },
-  ];
-
-  const mausoleumLoot = [
-    {
-      name: "+100 gold.",
-      img: itemsIcons.playergold,
-      iconClass: "icon-item-img",
-      buttonClass: "button-item",
-    },
-    {
-      name: "Journal - Part II.",
-      img: itemsIcons.note,
-      iconClass: "icon-item-img",
-      buttonClass: "button-item",
-    },
-  ];
-
-  const darkPassageLoot = [
-    {
-      name: "+100 gold.",
-      img: itemsIcons.playergold,
-      iconClass: "icon-item-img",
-      buttonClass: "button-item",
-    },
-    {
-      name: "Journal - Part III.",
-      img: itemsIcons.note,
-      iconClass: "icon-item-img",
-      buttonClass: "button-item",
-    },
-  ];
-
-  const lostGalleryLoot = [
-    {
-      name: "+100 gold.",
-      img: itemsIcons.playergold,
-      iconClass: "icon-item-img",
-      buttonClass: "button-item",
-    },
-    {
-      name: "Hawnyr's Journal.",
-      img: itemsIcons.note,
-      iconClass: "icon-item-img",
-      buttonClass: "button-item",
-    },
-  ];
-
-  // * Set items functions
-
-  const showKoetriaNote = () => {
-    setInNote((current) => !current);
-    setNoteName("Tome: Of Koetria");
-    setNoteText(notesInfo.ofKoetria);
-  };
-
-  const showJournalPI = () => {
-    setInNote((current) => !current);
-    setNoteName("Journal - Part I");
-    setNoteText(notesInfo.journalPartI);
-  };
-
-  const showJournalPII = () => {
-    setInNote((current) => !current);
-    setNoteName("Journal - Part II");
-    setNoteText(notesInfo.journalPartII);
-  };
-
-  const showJournalPIII = () => {
-    setInNote((current) => !current);
-    setNoteName("Journal - Part III");
-    setNoteText(notesInfo.journalPartIII);
-  };
-
-  const showJournalHawnyr = () => {
-    setInNote((current) => !current);
-    setNoteName("Journal - Hawnyr");
-    setNoteText(notesInfo.journalHawnyr);
-  };
-
-  // * Set items to inventory
-
-  useEffect(() => {
-    if (cemeteryEnemies == 0 && levelState.cemetery) {
-      setLoot(cemeteryLoot);
-      setHideLoot((current) => !current);
-      setLevelState({ ...levelState, cemetery: false });
-      setGold((gold) => gold + 100);
-      setInventory((prevState) => [
-        ...prevState,
-        {
-          fn: showJournalPI,
-          img: itemsIcons.note,
-          id: "journal-I",
-          tooltipText: itemText.journalI,
-          iconClass: "icon-item-img",
-          buttonClass: "button-item",
-        },
-        {
-          fn: showKoetriaNote,
-          img: itemsIcons.note,
-          id: "ofKoetria",
-          tooltipText: itemText.ofkoetria,
-          iconClass: "icon-item-img",
-          buttonClass: "button-item",
-        },
-      ]);
-    }
-    if (mausoleumEnemies == 0 && levelState.mausoleum) {
-      setLoot(mausoleumLoot);
-      setHideLoot((current) => !current);
-      setLevelState({ ...levelState, mausoleum: false });
-      setGold((gold) => gold + 100);
-      setInventory((prevState) => [
-        ...prevState,
-        {
-          fn: showJournalPII,
-          img: itemsIcons.note,
-          id: "journal-II",
-          tooltipText: itemText.journalII,
-          iconClass: "icon-item-img",
-          buttonClass: "button-item",
-        },
-      ]);
-    }
-    if (dPassageEnemies == 0 && levelState.darkPassage) {
-      setLoot(darkPassageLoot);
-      setHideLoot((current) => !current);
-      setLevelState({ ...levelState, darkPassage: false });
-      setGold((gold) => gold + 100);
-      setInventory((prevState) => [
-        ...prevState,
-        {
-          fn: showJournalPIII,
-          img: itemsIcons.note,
-          id: "journal-III",
-          tooltipText: itemText.journalIII,
-          iconClass: "icon-item-img",
-          buttonClass: "button-item",
-        },
-      ]);
-    }
-    if (lostGalleryEnemies == 0 && levelState.lostGallery) {
-      setLoot(lostGalleryLoot);
-      setHideLoot((current) => !current);
-      setLevelState({ ...levelState, lostGallery: false });
-      setGold((gold) => gold + 100);
-      setInventory((prevState) => [
-        ...prevState,
-        {
-          fn: showJournalHawnyr,
-          img: itemsIcons.note,
-          id: "journal-Hawnyr",
-          tooltipText: itemText.journalHawnyr,
-          iconClass: "icon-item-img",
-          buttonClass: "button-item",
-        },
-      ]);
-    }
-  }, []);
-
+  const [cemeteryEnemies, setCemeteryEnemies] = useState(cemeteryData);
+  const [cemeteryAmount, setCemeteryAmount] = useState(cemeteryData.length);
+  const [mausoleumEnemies, setMausoleumEnemies] = useState(mausoleumData);
+  const [mausoleumAmount, setMausoleumAmount] = useState(mausoleumData.length);
+  const [dPassageEnemies, setDPassageEnemies] = useState(darkPassageData);
+  const [dPassageAmount, setDPassageAmount] = useState(darkPassageData.length);
+  const [lostGalleryEnemies, setLostGalleryEnemies] = useState(lostGalleryData);
+  const [lostGalleryAmount, setLostGalleryAmount] = useState(
+    lostGalleryData.length
+  );
+  const [levelState, setLevelState] = useState({
+    cemetery: true,
+    mausoleum: true,
+    darkPassage: true,
+    lostGallery: true,
+  });
   return (
     <>
+      {!inHithair && !fight ? (
+        <div className="map-levels">
+          <SublayoutLevels
+            fight={fight}
+            setFight={setFight}
+            setEnemy={setEnemy}
+            setInventory={setInventory}
+            setGold={setGold}
+            setNoteName={setNoteName}
+            setNoteText={setNoteText}
+            setInNote={setInNote}
+            inCemetery={inCemetery}
+            inMausoleum={inMausoleum}
+            inDarkPassage={inDarkPassage}
+            inLostGallery={inLostGallery}
+            inHeartPrison={inHeartPrison}
+            cemeteryEnemies={cemeteryEnemies}
+            mausoleumEnemies={mausoleumEnemies}
+            dPassageEnemies={dPassageEnemies}
+            lostGalleryEnemies={lostGalleryEnemies}
+            setCemeteryEnemies={setCemeteryEnemies}
+            setMausoleumEnemies={setMausoleumEnemies}
+            setDPassageEnemies={setDPassageEnemies}
+            setLostGalleryEnemies={setLostGalleryEnemies}
+            setCemeteryAmount={setCemeteryAmount}
+            setMausoleumAmount={setMausoleumAmount}
+            setDPassageAmount={setDPassageAmount}
+            setLostGalleryAmount={setLostGalleryAmount}
+            levelState={levelState}
+            setLevelState={setLevelState}
+          />
+        </div>
+      ) : null}
+
+      {/* Next-Level Box */}
+
       {!fight ? (
-        <LayoutLevelsTemplate
-          loot={loot}
-          hideLoot={hideLoot}
-          setHideLoot={setHideLoot}
+        <SublayoutNextLevel
           inCemetery={inCemetery}
           inMausoleum={inMausoleum}
           inDarkPassage={inDarkPassage}
           inLostGallery={inLostGallery}
           inHeartPrison={inHeartPrison}
-          getCemeteryEnemies={getCemeteryEnemies}
-          getMausoleumEnemies={getMausoleumEnemies}
-          getDarkPassageEnemies={getDarkPassageEnemies}
-          getLostGalleryEnemies={getLostGalleryEnemies}
+          inHithair={inHithair}
+          setInCemetery={setInCemetery}
+          setInMausoleum={setInMausoleum}
+          setInDarkPassage={setInDarkPassage}
+          setInLostGallery={setInLostGallery}
+          setInHeartPrison={setInHeartPrison}
+          setInHithair={setInHithair}
+          setHeaderName={setHeaderName}
+          cemeteryAmount={cemeteryAmount}
+          mausoleumAmount={mausoleumAmount}
+          dPassageAmount={dPassageAmount}
+          lostGalleryAmount={lostGalleryAmount}
         />
       ) : null}
     </>

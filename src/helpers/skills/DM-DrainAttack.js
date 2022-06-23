@@ -43,9 +43,9 @@ export const drainAttack = (
     // * Attack starts
 
     (async () => {
-      UPDATE_MESSAGE((prev) => [...prev, TEXT]);
-      
       await TIMER(1000);
+
+      UPDATE_MESSAGE((prev) => [...prev, TEXT]);
 
       if (TARGET_HEALTH - DAMAGE_DEALT <= 0) {
         resolve(

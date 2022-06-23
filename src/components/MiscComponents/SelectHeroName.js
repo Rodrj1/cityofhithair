@@ -1,6 +1,7 @@
 import ButtonDialog from "./ButtonDialog";
 import { useState } from "react";
 import heroPortraits from "../../data/portraitsHeroes";
+
 const SelectHeroName = ({ heroClass, player, setPlayer }) => {
   const [nameData, setNameData] = useState("");
 

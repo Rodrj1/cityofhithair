@@ -45,9 +45,9 @@ export const attackEnemy = (
     ).toFixed(1)} damage.`;
 
     (async () => {
-      UPDATE_MESSAGE((prev) => [...prev, TEXT]);
-
       await TIMER(1000);
+
+      UPDATE_MESSAGE((prev) => [...prev, TEXT]);
 
       if (TARGET_HEALTH - DAMAGE_DEALT <= 0) {
         if (IS_PLAYER !== undefined) {

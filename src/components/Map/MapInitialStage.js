@@ -1,5 +1,5 @@
 import { useGetPlayerStats } from "../../helpers/hooks/useGetPlayerStats";
-import MainMap from "./MapMainLayout";
+import MapMain from "./MapMain";
 import HeroSelection from "./MapHeroSelection";
 
 const InitStage = () => {
@@ -13,7 +13,7 @@ const InitStage = () => {
           setPlayer={setPlayer}
         />
       ) : (
-        <MainMap player={player} setPlayer={setPlayer} />
+        <MapMain player={player} setPlayer={setPlayer} />
       )}
     </>
   );

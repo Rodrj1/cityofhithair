@@ -18,10 +18,6 @@ const LevelsEnemyTemplate = ({
       name: enemy.name,
       health: enemy.health,
       maxHealth: enemy.health,
-      attack: enemy.attack,
-      defense: enemy.defense,
-      portrait: enemy.portrait,
-      status: enemy.status,
     };
     setEnemy(selectEnemy);
     const removeEnemy = enemies.filter((enemy) => enemy.id !== id);

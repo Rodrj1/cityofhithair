@@ -13,17 +13,18 @@ const LayoutPlayer = ({
   noteName,
   noteText,
 }) => {
+
   const getInventory = inventory
     .sort((a, b) => a.id.localeCompare(b.id))
-    .map((el, index) => (
+    .map((item, index) => (
       <ButtonPlayer
         key={index}
-        id={el.id}
+        id={item.id}
         iconClass="icon-item-img"
         buttonClass="button-item"
-        tooltipText={el.tooltipText}
-        img={el.img}
-        fn={el.fn}
+        tooltipText={item.tooltipText}
+        img={item.img}
+        fn={item.fn}
       />
     ));
 
@@ -54,20 +55,23 @@ const LayoutPlayer = ({
             />
             <p>{gold}</p>
           </span>
+
           <span>
             <img src={itemsIcons.attack} className="stats-img" alt={"damage"} />
             <p>{player.attack}</p>
           </span>
+
           <span>
             <img src={itemsIcons.defense} className="stats-img" alt={"armor"} />
             <p>{player.defense}</p>
           </span>
+          
           {player.darkMastery ? (
             <span>
               <img
                 src={itemsIcons.darktome}
                 className="stats-img"
-                alt={"armor"}
+                alt={"darkmagic"}
               />
               <p>{player.darkMastery}</p>
             </span>

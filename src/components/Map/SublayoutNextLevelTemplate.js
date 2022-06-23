@@ -1,84 +1,21 @@
-import { useUISounds } from "../../helpers/hooks/useUISounds";
-import { useAnnouncer } from "../../helpers/hooks/useAnnouncer";
 import Announcer from "../MiscComponents/Announcer";
 import dungeonIcon from "../../assets/dungeon.svg";
 
-const LayoutNextLevel = ({
-  inCemetery,
-  setInCemetery,
-  cemeteryAmount,
-  inMausoleum,
-  setInMausoleum,
-  mausoleumAmount,
-  inDarkPassage,
-  setInDarkPassage,
-  dPassageAmount,
-  inLostGallery,
-  setInLostGallery,
-  lostGalleryAmount,
-  setInHeartPrison,
+const SublayoutNextLevelTemplate = ({
+  loadCemetery,
+  loadMausoleum,
+  loadDarkPassage,
+  loadLostGallery,
+  loadHeartPrison,
+  loadHithair,
   inHithair,
-  setInHithair,
-  setHeaderName,
+  inCemetery,
+  inMausoleum,
+  inDarkPassage,
+  inLostGallery,
+  playHover,
+  hideAnnouncer,
 }) => {
-  const { playHover } = useUISounds();
-
-  const { showAnnouncer, hideAnnouncer } = useAnnouncer();
-
-  const loadCemetery = () => {
-    setInCemetery((current) => !current);
-    setInHithair((current) => !current);
-    setHeaderName("Cemetery");
-  };
-  const loadMausoleum = () => {
-    if (cemeteryAmount == 0) {
-      setInMausoleum((current) => !current);
-      setInCemetery((current) => !current);
-      setHeaderName("Mausoleum");
-    } else {
-      showAnnouncer();
-    }
-  };
-
-  const loadDarkPassage = () => {
-    if (mausoleumAmount == 0) {
-      setInDarkPassage((current) => !current);
-      setInMausoleum((current) => !current);
-      setHeaderName("Dark Passage");
-    } else {
-      showAnnouncer();
-    }
-  };
-
-  const loadLostGallery = () => {
-    if (dPassageAmount == 0) {
-      setInLostGallery((current) => !current);
-      setInDarkPassage((current) => !current);
-      setHeaderName("LOST GALLERY");
-    } else {
-      showAnnouncer();
-    }
-  };
-
-  const loadHeartPrison = () => {
-    if (lostGalleryAmount == 0) {
-      setInHeartPrison((current) => !current);
-      setInLostGallery((current) => !current);
-      setHeaderName("HEART'S PRISON");
-    } else {
-      showAnnouncer();
-    }
-  };
-
-  const loadHithair = () => {
-    setInHithair((current) => !current);
-    setInCemetery(false);
-    setInMausoleum(false);
-    setInDarkPassage(false);
-    setInLostGallery(false);
-    setHeaderName("City of Hithair");
-  };
-
   return (
     <>
       {!hideAnnouncer ? <Announcer text="THERE ARE ENEMIES LEFT." /> : null}
@@ -181,4 +118,4 @@ const LayoutNextLevel = ({
   );
 };
 
-export default LayoutNextLevel;
+export default SublayoutNextLevelTemplate;

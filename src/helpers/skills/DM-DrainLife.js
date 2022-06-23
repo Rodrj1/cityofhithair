@@ -44,9 +44,9 @@ export const drainLife = (
 
     if (MAGIC_CHECK >= 0) {
       (async () => {
-        UPDATE_MESSAGE((prev) => [...prev, TEXT]);
-
         await TIMER(1000);
+
+        UPDATE_MESSAGE((prev) => [...prev, TEXT]);
 
         if (TARGET_HEALTH - SPELL_POWER <= 0) {
           resolve(CHANGE_FIGHT_STATUS((current) => !current));
