@@ -21,7 +21,7 @@ const HeroSelectionTemplate = ({ getSelected }) => {
 
               <h5>Health: {parseFloat(65).toFixed(1)}</h5>
               <h5>Attack: {parseFloat(10).toFixed(1)}</h5>
-              <h5>Defense: {parseFloat(45).toFixed(1)}</h5>
+              <h5>Defense: {parseFloat(40).toFixed(1)}</h5>
               <h5>Spiritual Power: {parseFloat(2).toFixed(1)}</h5>
               <h5>Potions: {2}</h5>
             </div>
@@ -72,7 +72,7 @@ const HeroSelectionTemplate = ({ getSelected }) => {
                 alt={"Dark Mage"}
               />
 
-              <h5>Health: {parseFloat(40).toFixed(1)}</h5>
+              <h5>Health: {parseFloat(47).toFixed(1)}</h5>
               <h5>Attack: {parseFloat(5).toFixed(1)}</h5>
               <h5>Defense: {parseFloat(20).toFixed(1)}</h5>
               <h5>Spiritual Power: {parseFloat(8).toFixed(1)}</h5>

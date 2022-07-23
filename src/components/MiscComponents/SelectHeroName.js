@@ -17,7 +17,7 @@ const SelectHeroName = ({ heroClass, player, setPlayer }) => {
         health: 65,
         maxHealth: 65,
         attack: 10,
-        defense: 45,
+        defense: 40,
         potions: 2,
         portrait: heroPortraits.knight,
         portraitFace: heroPortraits.knightheroface,
@@ -27,7 +27,7 @@ const SelectHeroName = ({ heroClass, player, setPlayer }) => {
       setPlayer({
         ...player,
         name: nameData,
-        health: 40,
+        health: 47,
         maxHealth: 40,
         defense: 20,
         magic: 8,
