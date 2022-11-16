@@ -32,7 +32,7 @@ On the right side of the screen there are two boxes of information. One contains
 
 ![right](https://user-images.githubusercontent.com/97490087/202051078-d4591780-28c0-4ef5-af34-f212d6b20827.png)
 
-##Levels
+## Levels
 
 The first level is the Cemetery which displays two skeletons and a dark knight that need to be defeated in order to advance to the next level, the Mausoleum.
 
