@@ -1,4 +1,4 @@
-## City of Hithair
+# CITY OF HITHAIR
 
 Simple turn-based minigame which serves as practice. For the sake of testing, defeat of the player has been removed; instead, the game will follow as if the player had won any confrontation that he loses.
 
