@@ -8,7 +8,7 @@ https://cityofhithair.netlify.app/
 
 ## Hero Selection
 
-Choose between two heroes, a knight and a dark wizard.
+Choose between two heroes, a knight and a dark wizard. Once you select someone, you can give whatever name you like.
 
 ![her](https://user-images.githubusercontent.com/97490087/202049197-324d8020-fe49-4488-bd27-8788b9a32a9b.png)
 
