@@ -1,10 +1,8 @@
 # CITY OF HITHAIR
 
+Play: https://cityofhithair.netlify.app/
+
 Simple turn-based minigame. For the sake of testing, defeat of the player has been removed; instead, the game will follow as if the player had won any confrontation that he loses.
-
-## Game in Netlify
-
-https://cityofhithair.netlify.app/
 
 ## Hero Selection
 
