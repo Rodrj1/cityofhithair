@@ -5,7 +5,7 @@ import { Enemy } from '../../Enemy';
 import { DialogNicolai } from '../../DialogNicolai';
 import { Centerer } from '../../Centerer';
 import { useEffect } from 'react';
-import werewolfHowl from '../../../assets/sound/werewolfHowl.ogg';
+import werewolfHowl from "../../../assets/sound/werewolfhowl.ogg";
 import styles from '../../../styles/Levels.module.scss';
 
 const playHowl = () => {
