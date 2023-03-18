@@ -1,0 +1,1 @@
+export { cityNPCs } from './cityNPCs';
