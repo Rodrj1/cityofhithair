@@ -9,7 +9,7 @@ import cannibalface from '../../assets/portraits/cannibalface.jpg';
 import attacksword from '../../assets/sound/attacksword.mp3';
 import attackcannibal from '../../assets/sound/attackcannibal.ogg';
 import attackwerewolf from '../../assets/sound/attackwerewolf.ogg';
-import hittedskele from '../../assets/sound/hittedSkeleton.mp3';
+import hittedskele from '../../assets/sound/hittedskeleton.mp3';
 import hitteddk from '../../assets/sound/hitteddarkknight.ogg';
 import hittedcannibal from '../../assets/sound/hittedcannibal.ogg';
 import hittedwerewolf from '../../assets/sound/hittedwerewolf.ogg';
