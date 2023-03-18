@@ -18,6 +18,8 @@ const deathKnight = () => {
 };
 
 export const knightStats = {
+  id: 150, 
+  level: "hithair",
   player: true,
   name: '',
   health: 65,
@@ -25,6 +27,7 @@ export const knightStats = {
   magic: 2,
   maxMagic: 2,
   attack: 11,
+  defaultAttack:11,
   defense: 5,
   criticalChance: 0,
   removedAttack: 0,

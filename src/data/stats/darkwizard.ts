@@ -23,6 +23,8 @@ const deathWizard = () => {
 };
 
 export const wizardStats = {
+  id: 150, 
+  level: "hithair",
   player: true,
   name: '',
   health: 47,
@@ -30,6 +32,7 @@ export const wizardStats = {
   magic: 8,
   maxMagic: 8,
   attack: 5,
+  defaultAttack: 5,
   defense: 1,
   criticalChance: 0,
   removedAttack: 0,
