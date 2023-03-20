@@ -1,6 +1,6 @@
 # City of Hithair
 
-Play: cityofhithair.netlify.app/
+Play: [City Of Hithair](https://cityofhithair.netlify.app/)
 
 ## Hero Selection
 
