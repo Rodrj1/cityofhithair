@@ -11,12 +11,6 @@ const PlayerUI = () => {
   const getGold = usePlayerStore((state) => state.gold);
   const isInNote = useDialogStore((state) => state.isInNote);
 
-  const getInventory = getPlayerInventory
-    .sort((a, b) => a.name.localeCompare(b.name))
-    .map((item: Item, index: number) => (
-      <img src={item.image} key={index} onClick={item.fn} />
-    ));
-
   return (
     <div className={styles.container}>
       {isInNote && (
@@ -53,7 +47,13 @@ const PlayerUI = () => {
         )}
       </div>
 
-      <div className={styles.inventory}>{getInventory}</div>
+      <div className={styles.inventory}>
+        {getPlayerInventory
+          .sort((a, b) => a.name.localeCompare(b.name))
+          .map((item: Item, index: number) => (
+            <img src={item.image} key={index} onClick={item.fn} />
+          ))}
+      </div>
     </div>
   );
 };

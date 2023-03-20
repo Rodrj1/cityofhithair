@@ -21,7 +21,6 @@ const Skill = ({ skill }: Props) => {
   const handleSkillAction = (action: string) => {
     updateAction(action);
 
-    //These are Self Cast so I need to fire them inmediately.
     if (action == 'Frenzy') handleActionOnEnemy(action);
     if (action == 'Defend') handleActionOnEnemy(action);
     if (action == 'Potion Of Life') handleActionOnEnemy(action);
@@ -35,6 +34,7 @@ const Skill = ({ skill }: Props) => {
         alt={skill.name}
         onClick={() => handleSkillAction(skill.name)}
       />
+
       {skill.name == 'Potion Of Life' && (
         <span className="value">{healthpotions}</span>
       )}

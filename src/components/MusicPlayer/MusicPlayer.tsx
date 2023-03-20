@@ -1,29 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useMusicPlayer } from '../../features/components/MusicPlayer';
 
 interface Props {
   track: string;
 }
 
 const MusicPlayer = ({ track }: Props) => {
-  const [musicIsPlaying, setMusicIsPlaying] = useState(true);
-
-  const handleOnClick = () => {
-    setMusicIsPlaying((current) => !current);
-    const music = document.getElementById('music') as HTMLAudioElement;
-    if (music) {
-      music.volume = 0.31;
-      if (musicIsPlaying == false) music.play();
-      else music.pause();
-    }
-  };
-
-  useEffect(() => {
-    const music = document.getElementById('music') as HTMLAudioElement;
-    music.volume = 0.31;
-    if (musicIsPlaying == false && music) {
-      music.pause();
-    }
-  }, [track]);
+  const { musicIsPlaying, handleOnClick } = useMusicPlayer({ track });
 
   return (
     <div className="musicPlayer">

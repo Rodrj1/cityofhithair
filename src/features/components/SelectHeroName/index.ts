@@ -1,0 +1,1 @@
+export { useSelectHeroName } from './useSelectHeroName';

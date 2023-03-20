@@ -16,20 +16,20 @@ const ShowLoot = ({ text }: Props) => {
     handleAnnouncer();
   };
 
-  const lootedItems = getLoot.map((loot, index) => (
-    <div key={index}>
-      <img src={loot.image} alt={loot.name} />
-      <p>{loot.name}</p>
-    </div>
-  ));
-
   return (
     <>
       {isVisible && !isInFight && (
         <Centerer>
           <div className={style.container}>
             <p>{text}</p>
-            <div className={style.items}>{lootedItems}</div>
+            <div className={style.items}>
+              {getLoot.map((loot, index) => (
+                <div key={index}>
+                  <img src={loot.image} alt={loot.name} />
+                  <p>{loot.name}</p>
+                </div>
+              ))}
+            </div>
             <button onClick={handleOnExit}>Close</button>
           </div>
         </Centerer>

@@ -1,25 +1,7 @@
-import { useState } from 'react';
-import { usePlayerStore } from '../../stores';
-import { knightStats, wizardStats } from '../../data/stats';
+import { useSelectHeroName } from '../../features/components/SelectHeroName';
 
 const SelectHeroName = () => {
-  const [tempName, setTempName] = useState('');
-  const getClass = usePlayerStore((state) => state.class);
-  const { establishInitialHero } = usePlayerStore();
-
-  const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setTempName(e.target.value);
-  };
-
-  const updateName = () => {
-    if (getClass == 'knight') {
-      const updateHero = { ...knightStats, name: tempName };
-      establishInitialHero(updateHero);
-    } else if (getClass == 'darkmage') {
-      const updateHero = { ...wizardStats, name: tempName };
-      establishInitialHero(updateHero);
-    }
-  };
+  const { handleOnChange, updateName } = useSelectHeroName();
 
   return (
     <>

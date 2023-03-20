@@ -8,6 +8,7 @@ import drainLife from '../../assets/skills/spellStealLife.webp';
 import weakness from '../../assets/skills/weakness.webp';
 import vulnerability from '../../assets/skills/vulnerability.webp';
 import blindness from '../../assets/skills/blindness.webp';
+import sacrifice from '../../assets/skills/sacrifice.webp';
 import rend from '../../assets/skills/rend.webp';
 import preview from '../../assets/skills/preview.webp';
 
@@ -18,6 +19,7 @@ export const skillsIcons = {
   healthPotion: potionhealth,
   manaPotion: potionmana,
   frenzy: frenzy,
+  sacrifice: sacrifice,
   drainLife: drainLife,
   weakness: weakness,
   vulnerability: vulnerability,

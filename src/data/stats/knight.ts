@@ -1,6 +1,6 @@
 import { heroPortraits } from '../general';
 import { attack, defend } from '../skills';
-import { drinkLifePotion, drinkManaPotion, frenzy } from '../skills/combat';
+import { drinkLifePotion, drinkManaPotion, frenzy, sacrifice } from '../skills/combat';
 import hittedknight from '../../assets/sound/hittedknight.ogg';
 import deathknight from '../../assets/sound/deathknight.ogg';
 import attacksword from '../../assets/sound/attacksword.mp3';
@@ -45,6 +45,6 @@ export const knightStats = {
   soundAttack: attackSword,
   soundHitted: hittedKnight,
   soundDeath: deathKnight,
-  skills: [attack, defend, frenzy],
+  skills: [attack, defend, frenzy, sacrifice],
   potions: [drinkLifePotion, drinkManaPotion],
 };

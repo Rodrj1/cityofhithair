@@ -1,7 +1,5 @@
-import { useEffect } from 'react';
 import { itemIcons } from '../../../data/stats';
-import { useBattleHandler } from '../../../features/components/Board';
-import { useBattleStore } from '../../../stores';
+import { useBoardUnit } from '../../../features/components/Board/BoardUnit';
 import { Player, Unit } from '../../../types';
 import { Bar } from '../../Bar';
 import { Skill } from '../../Skill';
@@ -12,43 +10,14 @@ interface Props {
 }
 
 const BoardUnit = ({ style, unit }: Props) => {
-  const { handleActionOnEnemy } = useBattleHandler();
-  const currentAction = useBattleStore((state) => state.action);
-  const turn = useBattleStore((state) => state.turn);
-  const isEnemy = (unit as Player).player == undefined;
-  const isEnemyTurn = turn == 'Enemy' && isEnemy;
-  const isPlayerTurn = currentAction != '' && isEnemy && turn == 'Player';
-
-  const handleOnClick = () => {
-    if (isPlayerTurn) {
-      handleActionOnEnemy(currentAction);
-    }
-  };
-
-  useEffect(() => {
-    if (isEnemyTurn && isEnemy) {
-      let enemyAction = Math.floor(Math.random() * unit.skills.length);
-      const action = unit.skills[enemyAction].name;
-      if (action == 'Weakness' || action == 'Vulnerability') {
-        if (unit.magic >= 2) handleActionOnEnemy(unit.skills[enemyAction].name);
-        else handleActionOnEnemy('Attack');
-      } else if (action == 'Drain Life') {
-        if (unit.magic >= 3) handleActionOnEnemy(unit.skills[enemyAction].name);
-        else handleActionOnEnemy('Attack');
-      } else handleActionOnEnemy('Attack');
-    }
-  }, [turn]);
+  const { handleOnClick, isEnemy } = useBoardUnit({ unit });
 
   return (
     <div className={style.unit}>
       <div className={style.mainInfo}>
         <h4>{unit.name}</h4>
 
-        <img
-          src={unit.portrait}
-          alt={unit.name}
-          onClick={handleOnClick}
-        />
+        <img src={unit.portrait} alt={unit.name} onClick={handleOnClick} />
 
         <Bar type={'health'} value={unit.health} maxValue={unit.maxHealth} />
         <Bar type={'mana'} value={unit.magic} maxValue={unit.maxMagic} />
@@ -58,12 +27,29 @@ const BoardUnit = ({ style, unit }: Props) => {
         <div className={style.stats}>
           <span>
             <img src={itemIcons.attack} alt="Attack" />
-            <p>{unit.attack.toFixed(1)}</p>
+            <p>
+              {unit.weaknessStatus == true ? (
+                <span className={style.affected}>
+                  {unit.attack.toFixed(1)}{' '}
+                </span>
+              ) : (
+                unit.attack.toFixed(1)
+              )}
+            </p>
           </span>
 
           <span>
             <img src={itemIcons.defense} alt="Defense" />
-            <p>{unit.defense.toFixed(1)}</p>
+            <p>
+              {' '}
+              {unit.vulnerabilityStatus == true ? (
+                <span className={style.affected}>
+                  {unit.defense.toFixed(1)}{' '}
+                </span>
+              ) : (
+                unit.defense.toFixed(1)
+              )}
+            </p>
           </span>
 
           {unit.darkMastery > 0 && (

@@ -50,6 +50,10 @@
             width: 35px;
           }
         }
+
+        .affected {
+          color: #ff0000;
+        }
       }
 
       .skills,
@@ -80,6 +84,9 @@
             padding: 5px;
             height: 35px;
             width: 35px;
+          }
+          .skillSelected {
+            border: 2px solid #fff;
           }
         }
       }
@@ -179,7 +186,7 @@
               height: 65px;
               width: 65px;
             }
-  
+
             img:last-child {
               cursor: pointer;
               border: 1px solid #5c4848;

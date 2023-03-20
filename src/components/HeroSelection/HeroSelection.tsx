@@ -1,29 +1,16 @@
 import SelectHeroName from '../SelectHeroName/SelectHeroName';
-import { useState } from 'react';
-import { useSpring, animated } from '@react-spring/web';
+import { animated } from '@react-spring/web';
 import { heroPortraits } from '../../data/general';
-import { useAnnouncerStore, usePlayerStore } from '../../stores';
 import { Centerer } from '../Centerer';
 import { wizardStats, knightStats } from '../../data/stats';
 import { Skill } from '../Skill';
 import { SkillPreview } from '../SkillPreview';
+import { useHeroSelection } from '../../features/components/HeroSelection';
 import style from '../../styles/HeroSelection.module.scss';
 
 const HeroSelection = () => {
-  const [selectNameIsVisible, setSelectNameIsVisible] = useState(false);
-  const { updateClass } = usePlayerStore();
-  const isPreviewVisible = useAnnouncerStore((state) => state.isPreviewVisible);
-
-  const animationProps = useSpring({
-    to: { opacity: 1 },
-    from: { opacity: 0 },
-    config: { duration: 1000 },
-  });
-
-  const getSelected = (chosenClass: string) => {
-    setSelectNameIsVisible((current) => !current);
-    updateClass(chosenClass);
-  };
+  const { selectNameIsVisible, isPreviewVisible, animationProps, getSelected } =
+    useHeroSelection();
 
   return (
     <animated.div style={animationProps} className="maxHeight">

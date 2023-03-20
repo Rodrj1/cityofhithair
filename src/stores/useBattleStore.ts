@@ -36,7 +36,7 @@ const useBattleStore = create<State & Actions>((set, get) => ({
       isInFight: !state.isInFight,
     })),
   updateBoardEnemy: (enemy: Unit) => set({ boardEnemy: enemy }),
-  updateBoardPlayer: (playerHero: Player) => set({ boardPlayer: playerHero }),
+  updateBoardPlayer: (playerHero: Player) => set({ boardPlayer: playerHero })
 }));
 
 export default useBattleStore;

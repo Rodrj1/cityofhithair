@@ -93,7 +93,7 @@ export const useBattleHandler = () => {
       let damage = Math.ceil(triggeringUnit.attack) * (1 - target.defense / 10);
       let rollCritical = Math.floor(Math.random() * 101);
       if (rollCritical <= triggeringUnit.criticalChance) damage * 2;
-      
+
       const updateHealth = target.health - damage;
 
       const updateTarget = {
@@ -181,29 +181,68 @@ export const useBattleHandler = () => {
 
       if (action == 'Frenzy') {
         playFrenzy();
-        const updateAttack = selfUnit.attack + 10;
+        const updateAttack = selfUnit.attack + 7;
         const updateDefense = selfUnit.defense - 2;
+        const updateSP = selfUnit.magic - 1 < 0 ? 0 : selfUnit.magic - 1;
 
         const updateAttributes = {
           ...selfUnit,
           attack: updateAttack,
           defense: updateDefense,
+          magic: updateSP,
         };
         updateHero = updateAttributes;
       }
 
       if (action == 'Defend') {
         playDefend();
-        const updateDefense = selfUnit.defense + 3;
+        const updateDefense = selfUnit.defense + 1;
+        const updateSP = selfUnit.magic - 1 < 0 ? 0 : selfUnit.magic - 1;
 
         const updateAttributes = {
           ...selfUnit,
           defense: updateDefense,
+          magic: updateSP,
         };
         updateHero = updateAttributes;
       }
 
       updateBoardPlayer(updateHero);
+
+      resolve();
+    });
+
+  const sacrifice = (player: Player, enemy: Unit) =>
+    new Promise<void>((resolve) => {
+      const triggeringUnit = player;
+      const target = enemy;
+
+      handleActionMessage('Sacrifice', triggeringUnit.name, target.name).then(
+        (text) => {
+          showAnnouncer(triggeringUnit, target, skillsIcons.sacrifice, text);
+        }
+      );
+
+      const updateSP = triggeringUnit.magic - 2;
+      const updateTriggeringUnitHealth = triggeringUnit.health - 11;
+
+      const updateTriggeringUnit = {
+        ...triggeringUnit,
+        health: updateTriggeringUnitHealth,
+        magic: updateSP,
+      };
+
+      const updateTarget = {
+        ...target,
+        defense: -3,
+        vulnerabilityStatus: true
+      };
+
+      triggeringUnit.soundAttack();
+      target.soundHitted();
+
+      updateBoardEnemy(updateTarget as Unit);
+      updateBoardPlayer(updateTriggeringUnit as Player);
 
       resolve();
     });
@@ -234,14 +273,13 @@ export const useBattleHandler = () => {
       const updateTarget = {
         ...target,
         attack: reducedAttack,
+        weaknessStatus: true
       };
 
       const updateCaster = {
         ...caster,
         magic: updateMagic,
       };
-
-      console.log(updateTarget, updateCaster);
 
       if (turn == 'Player') {
         updateBoardPlayer(updateCaster as Player);
@@ -290,6 +328,7 @@ export const useBattleHandler = () => {
       const updateTarget = {
         ...target,
         defense: updateDefense,
+        vulnerabilityStatus: true
       };
 
       if (turn == 'Player') {
@@ -427,17 +466,37 @@ export const useBattleHandler = () => {
         break;
 
       case 'Defend':
-        castOnSelf(player, 'Defend').then(async () => {
-          await waitTimer(1500);
-          updateTurn();
-        });
+        if (turn == 'Player') {
+          if (player.magic >= 1)
+            castOnSelf(player, 'Defend').then(async () => {
+              await waitTimer(1500);
+              updateTurn();
+            });
+          else InsufficientResources(player, 'No Spiritual Power');
+        }
+
         break;
 
       case 'Frenzy':
-        castOnSelf(player, 'Frenzy').then(async () => {
-          await waitTimer(1500);
-          updateTurn();
-        });
+        if (turn == 'Player') {
+          if (player.magic >= 1)
+            castOnSelf(player, 'Frenzy').then(async () => {
+              await waitTimer(1500);
+              updateTurn();
+            });
+          else InsufficientResources(player, 'No Spiritual Power');
+        }
+        break;
+
+      case 'Sacrifice':
+        if (turn == 'Player') {
+          if (player.magic >= 1 && player.health > 11)
+            sacrifice(player, enemy).then(async () => {
+              await waitTimer(1500);
+              updateTurn();
+            });
+          else InsufficientResources(player, 'No Spiritual Power');
+        }
         break;
 
       case 'Dark Magic: Attack':
@@ -532,6 +591,10 @@ const handleActionMessage = (
 
       case 'Frenzy':
         actionMessage = `${triggeringUnitName} casts Frenzy on self`;
+        break;
+
+      case 'Sacrifice':
+        actionMessage = `${triggeringUnitName} uses Sacrifice damaging ${targetName} armor permanently and receiving 11 damage in the process.`;
         break;
 
       case 'Weakness':

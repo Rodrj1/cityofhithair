@@ -80,12 +80,17 @@
         border: 2px solid var(--border-color);
         border-radius: 100px;
         padding: 5px;
-        height: 40px;
-        width: 40px;
+      }
+
+      img:first-child {
+        height: 50px;
+        width: 50px;
       }
 
       img:last-child {
         cursor: pointer;
+        height: 40px;
+        width: 40px;
       }
     }
   }
