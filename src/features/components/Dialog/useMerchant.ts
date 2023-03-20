@@ -31,27 +31,6 @@ export const useMerchant = () => {
     }
   };
 
-  const addSkillBlindness = () => {
-    if (getGold >= 200) {
-      if (playerHero.darkMastery > 0) {
-        const removeBlindnessFromMerchant = merchantInventory.filter(
-          (items) => items.name != 'Blindness'
-        );
-        setMerchantInventory(removeBlindnessFromMerchant);
-        updateGold(-200);
-        updateAnnouncerText('Blindness added to spells.');
-        handleAnnouncer();
-      } else {
-        handleAnnouncer();
-        updateAnnouncerText('Your character does not use Dark Magic.');
-        playWarning();
-      }
-    } else {
-      updateAnnouncerText('Insuficient Gold.');
-      playWarning();
-    }
-  };
-
   const addCombatMastery = () => {
     if (getGold >= 100) {
       if (!playerHero.darkMastery) {
@@ -111,15 +90,6 @@ export const useMerchant = () => {
         'Many a hero died in a past age. Their fallen bodies, those that stay dead, usually have things ranging from weapons to combat knowledge. I think you might appreciate this.\n' +
         '+ 3 to Attack',
       cost: 100,
-    },
-    {
-      fn: addSkillBlindness,
-      name: 'Spell: Blindness',
-      image: itemIcons.blindness,
-      description:
-        "A tome most oscure retrieved from something worse than powerhungry wizardlings. Whatever it was I don't know, but to cloud someone's sight is most heinous, even for such a creature. Poor me couldn't get a hold on this spell though, its sole writing is piercing.\n" +
-        'Learn Blindness',
-      cost: 200,
     },
     {
       fn: addHealthPotion,

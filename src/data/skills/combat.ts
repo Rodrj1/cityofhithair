@@ -10,7 +10,8 @@ export const attack = {
 export const defend = {
   name: 'Defend',
   description:
-    'Adds an aditional point in defense. Each point in defense decreases damage by 10%. Consumes the turn.',
+    'Adds an aditional point in defense. Each point in defense decreases damage by 10%. Consumes the turn.' +
+    '\nSelf Cast: Will fire inmediately.',
   image: skillsIcons.defend,
   cost: 2,
 };
@@ -18,7 +19,8 @@ export const defend = {
 export const frenzy = {
   name: 'Frenzy',
   description:
-    'Strong buff that enhances your damage by seven but reduces your defenses by two points. Consumes the turn.',
+    'Strong buff that enhances your damage by seven but reduces your defenses by two points. Consumes the turn.' +
+    '\nSelf Cast: Will fire inmediately.',
   image: skillsIcons.frenzy,
   cost: 2,
 };
