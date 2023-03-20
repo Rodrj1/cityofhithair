@@ -37,38 +37,38 @@ const NextLevel = () => {
     useLevelsStore();
 
   const loadCemetery = () => {
-    updateLevelStatus('hithair');
-    updateLevelStatus('cemetery');
+    updateLevelStatus('isInHithair');
+    updateLevelStatus('isInCemetery');
     updateLevelName('Cemetery');
   };
   const loadMausoleum = () => {
     if (cemeteryAmount == 0) {
-      updateLevelStatus('cemetery');
-      updateLevelStatus('mausoleum');
+      updateLevelStatus('isInCemetery');
+      updateLevelStatus('isInMausoleum');
       updateLevelName('Mausoleum');
     }
   };
 
   const loadDarkPassage = () => {
     if (mausoleumAmount == 0) {
-      updateLevelStatus('mausoleum');
-      updateLevelStatus('dark passage');
+      updateLevelStatus('isInMausoleum');
+      updateLevelStatus('isInDarkPassage');
       updateLevelName('Dark Passage');
     }
   };
 
   const loadLostGallery = () => {
     if (darkPassageAmount == 0) {
-      updateLevelStatus('dark passage');
-      updateLevelStatus('lost gallery');
+      updateLevelStatus('isInDarkPassage');
+      updateLevelStatus('isInLostGallery');
       updateLevelName('Lost Gallery');
     }
   };
 
   const loadHeartPrison = () => {
     if (lostGalleryAmount == 0) {
-      updateLevelStatus('lost gallery');
-      updateLevelStatus('heart prison');
+      updateLevelStatus('isInLostGallery');
+      updateLevelStatus('isInHeartPrison');
       updateLevelName("Heart's Prison");
     }
   };

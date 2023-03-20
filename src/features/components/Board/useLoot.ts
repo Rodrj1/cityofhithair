@@ -77,7 +77,7 @@ export const useLoot = () => {
     updateLevelsCompletion(enemyLevel);
     handleAnnouncer();
     switch (enemyLevel) {
-      case 'cemetery':
+      case 'cemeteryEnemies':
         updateGold(+100);
         updateInventory([
           {
@@ -99,7 +99,7 @@ export const useLoot = () => {
         updatePotion("manaPotions", 1)
         updatePotion("healthPotions", 1)
         break;
-      case 'mausoleum':
+      case 'mausoleumEnemies':
         updateGold(+175);
         updateLoot(mausoleumLoot);
         updateInventory([
@@ -113,7 +113,7 @@ export const useLoot = () => {
         ]);
         updatePotion("healthPotions", 1)
         break;
-      case 'dark passage':
+      case 'dPassageEnemies':
         updateGold(+280);
         updateLoot(darkPassageLoot);
         updateInventory([
@@ -128,7 +128,7 @@ export const useLoot = () => {
         updatePotion("healthPotions", 2)
         updatePotion("manaPotions", 1)
         break;
-      case 'lost gallery':
+      case 'lostGalleryEnemies':
         updateLoot(lostGalleryLoot);
         updateInventory([
           {

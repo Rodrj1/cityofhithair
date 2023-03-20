@@ -7,6 +7,20 @@ import {
 } from '../data/general';
 import { Unit } from '../types';
 
+type possibleLevelsToUpdateStatus =
+  | 'isInHithair'
+  | 'isInCemetery'
+  | 'isInMausoleum'
+  | 'isInDarkPassage'
+  | 'isInLostGallery'
+  | 'isInHeartPrison';
+
+type possibleLevelsForEnemies =
+  | 'cemeteryEnemies'
+  | 'mausoleumEnemies'
+  | 'dPassageEnemies'
+  | 'lostGalleryEnemies';
+
 interface State {
   levelName: string;
   isInHithair: boolean;
@@ -30,8 +44,11 @@ interface State {
 
 interface Actions {
   updateLevelName: (level: string) => void;
-  updateLevelStatus: (level: string) => void;
-  updateLevelEnemies: (enemyLevel: string, id: number) => Promise<Array<Unit>>;
+  updateLevelStatus: (level: possibleLevelsToUpdateStatus) => void;
+  updateLevelEnemies: (
+    enemyLevel: possibleLevelsForEnemies,
+    id: number
+  ) => Promise<Array<Unit>>;
   returnToHithair: () => void;
   updateLevelsCompletion: (level: string) => void;
   updateCannibalDied: () => void;
@@ -57,68 +74,18 @@ const useLevelsStore = create<State & Actions>((set, get) => ({
   },
   cannibalDied: false,
   updateLevelName: (level: string) => set(() => ({ levelName: level })),
-  updateLevelStatus: (level: string) => {
-    if (level == 'hithair') {
-      set((state) => ({
-        isInHithair: !state.isInHithair,
-      }));
-    }
-    if (level == 'cemetery') {
-      set((state) => ({
-        isInCemetery: !state.isInCemetery,
-      }));
-    }
-    if (level == 'mausoleum') {
-      set((state) => ({
-        isInMausoleum: !state.isInMausoleum,
-      }));
-    }
-    if (level == 'dark passage') {
-      set((state) => ({
-        isInDarkPassage: !state.isInDarkPassage,
-      }));
-    }
-    if (level == 'lost gallery') {
-      set((state) => ({
-        isInLostGallery: !state.isInLostGallery,
-      }));
-    }
-    if (level == 'heart prison') {
-      set((state) => ({
-        isInHeartPrison: !state.isInHeartPrison,
-      }));
-    }
+  updateLevelStatus: (level: possibleLevelsToUpdateStatus) => {
+    set((state) => ({
+      [level]: !state[level],
+    }));
   },
-  updateLevelEnemies: (enemyLevel: string, id: number) =>
+  updateLevelEnemies: (enemyLevel: possibleLevelsForEnemies, id: number) =>
     new Promise<Array<Unit>>((resolve) => {
-      if (enemyLevel == 'cemetery') {
-        const updateEnemies = get().cemeteryEnemies.filter(
-          (enemies) => enemies.id != id
-        );
-        set({ cemeteryEnemies: updateEnemies });
-        resolve(updateEnemies);
-      }
-      if (enemyLevel == 'mausoleum') {
-        const updateEnemies = get().mausoleumEnemies.filter(
-          (enemies) => enemies.id != id
-        );
-        set({ mausoleumEnemies: updateEnemies });
-        resolve(updateEnemies);
-      }
-      if (enemyLevel == 'dark passage') {
-        const updateEnemies = get().dPassageEnemies.filter(
-          (enemies) => enemies.id != id
-        );
-        set({ dPassageEnemies: updateEnemies });
-        resolve(updateEnemies);
-      }
-      if (enemyLevel == 'lost gallery') {
-        const updateEnemies = get().lostGalleryEnemies.filter(
-          (enemies) => enemies.id != id
-        );
-        set({ lostGalleryEnemies: updateEnemies });
-        resolve(updateEnemies);
-      }
+      const updateEnemies = get()[enemyLevel].filter(
+        (enemies) => enemies.id != id
+      );
+      set({ [enemyLevel]: updateEnemies });
+      resolve(updateEnemies);
     }),
   returnToHithair: () =>
     set((state) => ({

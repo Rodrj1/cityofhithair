@@ -68,7 +68,7 @@ const deathSkeleton = () => {
 export const cemeteryData: Array<Unit> = [
   {
     id: 3,
-    level: 'cemetery',
+    level: 'cemeteryEnemies',
     name: 'Skeleton',
     health: 16,
     maxHealth: 16,
@@ -108,7 +108,7 @@ export const cemeteryData: Array<Unit> = [
     darkMastery: 0,
     portrait: skeletonportrait,
     portraitFace: skeletonface,
-    level: 'cemetery',
+    level: 'cemeteryEnemies',
     removedAttack: 0,
     removedDefense: 0,
     frenzyAttack: 0,
@@ -136,7 +136,7 @@ export const cemeteryData: Array<Unit> = [
     criticalChance: 12,
     portrait: darkknightportrait,
     portraitFace: darkknightface,
-    level: 'cemetery',
+    level: 'cemeteryEnemies',
     removedAttack: 0,
     removedDefense: 0,
     frenzyAttack: 0,
@@ -166,7 +166,7 @@ export const mausoleumData: Array<Unit> = [
     maxMagic: 0,
     portrait: skeletonportrait,
     portraitFace: skeletonface,
-    level: 'mausoleum',
+    level: 'mausoleumEnemies',
     removedAttack: 0,
     removedDefense: 0,
     frenzyAttack: 0,
@@ -194,7 +194,7 @@ export const mausoleumData: Array<Unit> = [
     maxMagic: 0,
     portrait: skeletonportrait,
     portraitFace: skeletonface,
-    level: 'mausoleum',
+    level: 'mausoleumEnemies',
     removedAttack: 0,
     removedDefense: 0,
     frenzyAttack: 0,
@@ -235,7 +235,7 @@ export const mausoleumData: Array<Unit> = [
     soundHitted: hittedDarkKnight,
     soundDeath: deathDarkKnight,
     skills: [attack, vulnerability],
-    level: 'mausoleum',
+    level: 'mausoleumEnemies',
   },
   {
     id: 11,
@@ -263,7 +263,7 @@ export const mausoleumData: Array<Unit> = [
     soundHitted: hittedDarkKnight,
     soundDeath: deathDarkKnight,
     skills: [attack, weakness],
-    level: 'mausoleum',
+    level: 'mausoleumEnemies',
   },
 ];
 
@@ -294,7 +294,7 @@ export const darkPassageData: Array<Unit> = [
     soundHitted: hittedCannibal,
     soundDeath: deathCannibal,
     skills: [attack, vulnerability],
-    level: 'dark passage',
+    level: 'dPassageEnemies',
   },
 ];
 
@@ -325,7 +325,7 @@ export const lostGalleryData: Array<Unit> = [
     soundHitted: hittedWerewolf,
     soundDeath: deathWerewolf,
     skills: [attack],
-    level: 'lost gallery',
+    level: 'lostGalleryEnemies',
   },
   {
     id: 13,
@@ -353,6 +353,6 @@ export const lostGalleryData: Array<Unit> = [
     soundHitted: hittedDarkKnight,
     soundDeath: deathDarkKnight,
     skills: [attack, drainLife, vulnerability],
-    level: 'lost gallery',
+    level: 'lostGalleryEnemies',
   },
 ];

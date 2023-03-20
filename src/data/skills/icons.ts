@@ -7,7 +7,6 @@ import frenzy from '../../assets/skills/frenzyicon.webp';
 import drainLife from '../../assets/skills/spellStealLife.webp';
 import weakness from '../../assets/skills/weakness.webp';
 import vulnerability from '../../assets/skills/vulnerability.webp';
-import blindness from '../../assets/skills/blindness.webp';
 import sacrifice from '../../assets/skills/sacrifice.webp';
 import rend from '../../assets/skills/rend.webp';
 import preview from '../../assets/skills/preview.webp';
@@ -23,7 +22,6 @@ export const skillsIcons = {
   drainLife: drainLife,
   weakness: weakness,
   vulnerability: vulnerability,
-  blindness: blindness,
   rend: rend,
   preview: preview
 };
