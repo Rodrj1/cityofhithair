@@ -58,17 +58,19 @@ export const useBattleHandler = () => {
 
   const handleOnDeath = (enemy: Player | Unit) => {
     enemy.soundDeath();
-    updateLevelEnemies(enemy.level, enemy.id).then(async (enemiesInLevel) => {
-      if (enemiesInLevel.length == 0) {
-        await waitTimer(1400);
-        resetTurn();
-        updateFightingStatus();
-        handleLoot(enemy.level);
-      } else {
-        await waitTimer(1400);
-        updateFightingStatus();
+    updateLevelEnemies(enemy.level as any, enemy.id).then(
+      async (enemiesInLevel) => {
+        if (enemiesInLevel.length == 0) {
+          await waitTimer(1400);
+          resetTurn();
+          updateFightingStatus();
+          handleLoot(enemy.level);
+        } else {
+          await waitTimer(1400);
+          updateFightingStatus();
+        }
       }
-    });
+    );
   };
 
   const attackEnemy = (turn: string, player: Player, enemy: Unit) =>
@@ -235,7 +237,7 @@ export const useBattleHandler = () => {
       const updateTarget = {
         ...target,
         defense: -3,
-        vulnerabilityStatus: true
+        vulnerabilityStatus: true,
       };
 
       triggeringUnit.soundAttack();
@@ -273,7 +275,7 @@ export const useBattleHandler = () => {
       const updateTarget = {
         ...target,
         attack: reducedAttack,
-        weaknessStatus: true
+        weaknessStatus: true,
       };
 
       const updateCaster = {
@@ -328,7 +330,7 @@ export const useBattleHandler = () => {
       const updateTarget = {
         ...target,
         defense: updateDefense,
-        vulnerabilityStatus: true
+        vulnerabilityStatus: true,
       };
 
       if (turn == 'Player') {
@@ -467,12 +469,12 @@ export const useBattleHandler = () => {
 
       case 'Defend':
         if (turn == 'Player') {
-          if (player.magic >= 1)
+          if (player.magic >= 1) {
             castOnSelf(player, 'Defend').then(async () => {
               await waitTimer(1500);
               updateTurn();
             });
-          else InsufficientResources(player, 'No Spiritual Power');
+          } else InsufficientResources(player, 'No Spiritual Power');
         }
 
         break;

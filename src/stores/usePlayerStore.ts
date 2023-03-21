@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { Item, Player } from '../types';
+import { Item, Player, skill } from '../types';
 
 interface State {
   player: Player;
@@ -8,6 +8,7 @@ interface State {
   gold: number;
   healthPotions: number;
   manaPotions: number;
+  selectedSkill: skill;
 }
 
 interface Actions {
@@ -20,6 +21,7 @@ interface Actions {
     potion: 'healthPotions' | 'manaPotions',
     value: number
   ) => void;
+  updateSelectedSkill: (skill: skill) => void;
 }
 
 const usePlayerStore = create<State & Actions>((set, get) => ({
@@ -29,6 +31,7 @@ const usePlayerStore = create<State & Actions>((set, get) => ({
   gold: 10000,
   healthPotions: 2,
   manaPotions: 1,
+  selectedSkill: {} as skill,
   establishInitialHero: (hero: Player) =>
     set(() => ({
       player: hero,
@@ -53,6 +56,10 @@ const usePlayerStore = create<State & Actions>((set, get) => ({
       [potion]: state[potion] + value,
     }));
   },
+  updateSelectedSkill: (skill: skill) =>
+    set(() => ({
+      selectedSkill: skill,
+    })),
 }));
 
 export default usePlayerStore;

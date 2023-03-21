@@ -59,6 +59,11 @@
   font-size: 1.33rem;
 }
 
+.skillClicked {
+  transition: .1s;
+  border: 1px solid #fff !important;
+}
+
 @media (min-width: 280px) and (max-width: 480px) {
   .blackDisplay {
     .content {

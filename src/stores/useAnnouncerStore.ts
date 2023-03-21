@@ -10,6 +10,7 @@ interface State {
   isAnnouncerVisible: boolean;
   isPreviewVisible: boolean;
   isItemPreviewVisible: boolean;
+  isSkillQuestion: boolean;
 }
 
 interface Actions {
@@ -21,8 +22,8 @@ interface Actions {
   handlePreviewInfo: (skill: skill) => void;
   handleItemPreview: (item?: Item) => void;
   handleItemInfo: (item: Item) => void;
+  handleSkillQuestion: () => void;
 }
-
 
 const useAnnouncerStore = create<State & Actions>((set, get) => ({
   announcerText: '',
@@ -33,6 +34,7 @@ const useAnnouncerStore = create<State & Actions>((set, get) => ({
   isAnnouncerVisible: false,
   isPreviewVisible: false,
   isItemPreviewVisible: false,
+  isSkillQuestion: false,
   updateLoot: (items: Array<ItemLoot>) => set({ loot: items }),
   updateAnnouncerAction: (action: Action) => set({ announcerAction: action }),
   updateAnnouncerText: (text: string) => set({ announcerText: text }),
@@ -60,6 +62,11 @@ const useAnnouncerStore = create<State & Actions>((set, get) => ({
     }));
   },
   handleItemInfo: (item: Item) => set({ itemPreviewInfo: item }),
+  handleSkillQuestion: () => {
+    set((state) => ({
+      isSkillQuestion: !state.isSkillQuestion,
+    }));
+  },
 }));
 
 export default useAnnouncerStore;

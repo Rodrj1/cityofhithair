@@ -1,11 +1,11 @@
 import { skill } from '../../types';
-import { useBattleHandler } from '../../features/components/Board';
 import {
   useAnnouncerStore,
   useBattleStore,
   usePlayerStore,
 } from '../../stores';
 import previewimg from '../../assets/skills/preview.webp';
+import { useEffect, useState } from 'react';
 
 interface Props {
   skill: skill;
@@ -13,27 +13,46 @@ interface Props {
 
 const Skill = ({ skill }: Props) => {
   const { updateAction } = useBattleStore();
-  const { handlePreview } = useAnnouncerStore();
-  const { handleActionOnEnemy } = useBattleHandler();
+  const { handlePreview, handleSkillQuestion } = useAnnouncerStore();
+  const { updateSelectedSkill } = usePlayerStore();
   const healthpotions = usePlayerStore((state) => state.healthPotions);
   const manaPotions = usePlayerStore((state) => state.manaPotions);
+  const selectedSkill = usePlayerStore((state) => state.selectedSkill);
+
+  const [storeSkillIcon, setStoreSkillIcon] = useState<JSX.Element>();
 
   const handleSkillAction = (action: string) => {
     updateAction(action);
-
-    if (action == 'Frenzy') handleActionOnEnemy(action);
-    if (action == 'Defend') handleActionOnEnemy(action);
-    if (action == 'Potion Of Life') handleActionOnEnemy(action);
-    if (action == 'Potion Of Magic') handleActionOnEnemy(action);
+    updateSelectedSkill(skill);
+    if (action == 'Frenzy') handleSkillQuestion();
+    if (action == 'Defend') handleSkillQuestion();
+    if (action == 'Potion Of Life') handleSkillQuestion();
+    if (action == 'Potion Of Magic') handleSkillQuestion();
   };
+
+  useEffect(() => {
+    if (selectedSkill === skill) {
+      setStoreSkillIcon(
+        <img
+          className="skillClicked"
+          src={skill.image}
+          alt={skill.name}
+          onClick={() => handleSkillAction(skill.name)}
+        />
+      );
+    } else
+      setStoreSkillIcon(
+        <img
+          src={skill.image}
+          alt={skill.name}
+          onClick={() => handleSkillAction(skill.name)}
+        />
+      );
+  }, [selectedSkill]);
 
   return (
     <div>
-      <img
-        src={skill.image}
-        alt={skill.name}
-        onClick={() => handleSkillAction(skill.name)}
-      />
+      {storeSkillIcon}
 
       {skill.name == 'Potion Of Life' && (
         <span className="value">{healthpotions}</span>
